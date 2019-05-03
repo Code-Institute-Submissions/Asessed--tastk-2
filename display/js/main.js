@@ -7,7 +7,7 @@ function makeGraphs(error, MoonsOfUranus) {
 
     MoonsOfUranus.forEach(function(d) {
         d.DistanceFromUranus = parseInt(d.DistanceFromUranus);
-        d.Gravity = parseInt(d.Gravity);
+        d.Gravity = parseFloat(d.Gravity);
         d.Temperature = parseInt(d.Temperature);
     })
 
@@ -74,14 +74,14 @@ function display_orbital_distance(ndx) {
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
         .elasticY(true)
-        .xAxisLabel("Orbital distance (km in thousends)")
+        .xAxisLabel("Orbital distance (km in thousands)")
         .yAxis().ticks(20);
 }
 
 function display_grav_dist_comparison(ndx) {
     var distDim = ndx.dimension(dc.pluck('DistanceFromUranus'))
     var gravdistDim = ndx.dimension(function(d) {
-        return [d.DistanceFromUranus, d.Gravity];
+        return [d.DistanceFromUranus ,d.Gravity ,d.Name];
     });
     var gravityDistGroup = gravdistDim.group();
 
@@ -92,14 +92,14 @@ function display_grav_dist_comparison(ndx) {
         .width(1000)
         .height(400)
         .x(d3.scale.linear().domain([minDist, maxDist]))
-        .y(d3.scale.linear())
+        .y(d3.scale.linear().domain([0, 0.5]))
         .brushOn(false)
         .symbolSize(10)
         .clipPadding(10)
         .yAxisLabel("Gravity (m/s)")
         .xAxisLabel("DistanceFromUranus (km)")
         .title(function(d) {
-            return d.key[0] + d.key[1];
+            return d.key[1] + " by " + d.key[0] + " (" + d.key[2] + ")";
         })
         .dimension(distDim)
         .group(gravityDistGroup)
