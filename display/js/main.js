@@ -6,16 +6,17 @@ function makeGraphs(error, MoonsOfUranus) {
     var ndx = crossfilter(MoonsOfUranus);
 
     MoonsOfUranus.forEach(function(d) {
-        
+        d.DistanceFromUranus = parseInt(d.DistanceFromUranus);
+        d.Gravity = parseInt(d.Gravity);
         d.Temperature = parseInt(d.Temperature);
     })
 
     display_surface_temperature(ndx);
     display_orbit_time(ndx);
     display_orbital_distance(ndx);
-    display_grav_temp_comparison(ndx);
+    display_grav_dist_comparison(ndx);
     display_moon_radius(ndx);
-    
+
 
 
     dc.renderAll();
@@ -38,7 +39,7 @@ function display_surface_temperature(ndx) {
         .xUnits(dc.units.ordinal)
         .elasticY(true)
         .xAxisLabel("Temperature (kelvins)")
-        .yAxis().ticks(20);
+        .yAxis().ticks(10);
 }
 
 function display_orbit_time(ndx) {
@@ -56,7 +57,7 @@ function display_orbit_time(ndx) {
         .xUnits(dc.units.ordinal)
         .elasticY(true)
         .xAxisLabel("Orbital time (hours)")
-        .yAxis().ticks(20);
+        .yAxis().ticks(10);
 }
 
 function display_orbital_distance(ndx) {
@@ -64,7 +65,7 @@ function display_orbital_distance(ndx) {
     var orbGroup = orbDim.group();
 
     dc.barChart("#orbital-distance")
-        .width(400)
+        .width(600)
         .height(300)
         .margins({ top: 10, right: 50, bottom: 30, left: 50 })
         .dimension(orbDim)
@@ -77,33 +78,33 @@ function display_orbital_distance(ndx) {
         .yAxis().ticks(20);
 }
 
-function display_grav_temp_comparison(ndx) {
-    var gravDim = ndx.dimension(dc.pluck('Gravity'))
-    var TempDim = ndx.dimension(function(d) {
-        return [d.Gravity, d.Temperature, d.Name];
+function display_grav_dist_comparison(ndx) {
+    var distDim = ndx.dimension(dc.pluck('DistanceFromUranus'))
+    var gravdistDim = ndx.dimension(function(d) {
+        return [d.DistanceFromUranus, d.Gravity];
     });
-    var gravityTempGroup = TempDim.group();
+    var gravityDistGroup = gravdistDim.group();
 
-    var minExperience = gravDim.bottom(1)[0].Radius;
-    var maxExperience = gravDim.top(1)[0].Radius;
+    var minDist = distDim.bottom(1)[0].DistanceFromUranus;
+    var maxDist = distDim.top(1)[0].DistanceFromUranus;
 
     dc.scatterPlot("#radius-temp")
-        .width(800)
+        .width(1000)
         .height(400)
-        .x(d3.scale.linear().domain([minExperience, maxExperience]))
-        .y(d3.scale.ordinal())
-
+        .x(d3.scale.linear().domain([minDist, maxDist]))
+        .y(d3.scale.linear())
         .brushOn(false)
-        .symbolSize(8)
+        .symbolSize(10)
         .clipPadding(10)
-        .yAxisLabel("Temp")
-        .xAxisLabel("Gravity")
+        .yAxisLabel("Gravity (m/s)")
+        .xAxisLabel("DistanceFromUranus (km)")
         .title(function(d) {
-            return d.key[2];
+            return d.key[0] + d.key[1];
         })
-        .dimension(TempDim)
-        .group(gravityTempGroup)
-        .margins({ top: 10, right: 50, bottom: 75, left: 75 });
+        .dimension(distDim)
+        .group(gravityDistGroup)
+        .margins({ top: 10, right: 50, bottom: 75, left: 75 })
+        .xAxis().ticks(15);
 }
 
 function display_moon_radius(ndx) {
@@ -111,12 +112,12 @@ function display_moon_radius(ndx) {
     var radGroup = radDim.group();
 
     dc.pieChart("#moons-radius")
-        .width(300)
-        .height(300)
+        .width(400)
+        .height(400)
         .radius(100)
         .innerRadius(30)
         .dimension(radDim)
         .group(radGroup)
-        .title(function(d) { return "Wag wan"; });
+        .title(function(d) { return "km in thousends"; });
 
 }
