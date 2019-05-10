@@ -1,4 +1,103 @@
-.html-file {
+/*--------------------------------------------------------------Header*/
+
+.header {
     background-color: black;
     color: white;
+    text-align: center;
+    width: 100%;
+    border-right: 0px;
+    margin-bottom: 5px;
+}
+
+.intro {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 12pt;
+    width: 95%;
+}
+
+/*--------------------------------------------------------------Code*/
+
+.code {
+    background-color: #AFAFAF;
+    width: 100%;
+    border-right: 0px;
+    margin-right: 0px;
+}
+
+.icon-moon {
+    color: #989898;
+    font-size: 30px;
+    border: 10px;
+}
+
+.star-icon {
+    color: #FBFB09;
+}
+
+.center {
+    text-align: center;
+}
+
+/*--------------------------------------------------------------Charts*/
+
+.pie-chart {
+    text-align: center;
+}
+
+.bar-chart {
+    border: 10px;
+    margin-left: 0px;
+    border-left: 10px;
+    text-align: center;
+}
+
+.chart-info {
+    border: 10px;
+    text-align: center;
+}
+
+.break {
+    color: #676767;
+}
+
+/*--------------------------------------------------------------Footer*/
+
+.footer {
+    margin: 5%px;
+    background-color: #989898;
+    width: 100%;
+    border: 0%;
+    border-right: 0px;
+    text-align: center;
+}
+
+
+/*--------------------------------------------------------------Media*/
+
+@media(max-width: 767px) {
+
+    .hide-mobile {
+        display: none;
+    }
+
+    .intro {
+        font-size: 9pt;
+    }
+    .bar-chart {
+        width: 350px;
+    }
+
+}
+
+@media(max-width: 991px) {
+    .hide-medium {
+        display: none;
+    }
+}
+
+@media(min-width: 992px) {
+    .display-lrg {
+        display: text
+    }
 }

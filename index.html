@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The 27 moons</title>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="display/css/main.css" type="text/css" />
     <link rel="stylesheet" href="display/css/dc.min.css" type="text/css" />
 
@@ -19,31 +22,76 @@
 </head>
 
 <body>
-    <div class="html-file">
-        <h1>The moons of Uranus</h1>
-        <p>Welcome, here you will find a short but informative site to teach you a bit about the 27 moons of the 7th planet in our solar system, Uranus.</p>
-        <div>
-            <div id="moons-radius"></div>
+    <div class="code">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="header">
+                    <h1><i class="fas fa-moon icon-moon"></i><i class="fas fa-star star-icon"></i>The moons of Uranus<i class="fas fa-star star-icon"></i><i class="fas fa-moon icon-moon"></i></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row intro">
+            <p>Welcome, here you will find a short but informative site to teach you a bit about the 27 moons of the 7th planet in our solar system, Uranus. As you can see from the graphs and charts displayed below,we will only be focusing on a few key features
+                and using these to try and discover some trends. The first thing to give you a rough idea of the sheer scale, see below at the pie chart measuring the radius and quantity of these moons in the mesurment of thousends of km.</p>
         </div>
 
-        <div>
-            <div id="radius-temp"></div>
+        <div class="hide-mobile">
+            <hr class="break">
         </div>
 
-        <div>
-            <div id="surface-temp"></div>
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12 graph-mobile pie-chart" id="moons-radius"></div>
+            <div class=" col-lg-8 col-md-12 hide-mobile center" id="grav-planetDist"></div>
         </div>
 
-        <div>
-            <div id="orbital-distance"></div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 chart-info hide-medium">As we can see, majority of the moons fit into the "26 thousend to 50 thousend" bracket, while the lease fit into the "101 thousend to 500 thousend" bracket.</div>
+            <div class="col-lg-8 col-md-8 hide-mobile chart-info hide-medium">I think it is clear to say that as the size of these moons increases, the gravity depletes.</div>
         </div>
 
-        <div>
-            <div id="orbit-time"></div>
+        <div class="hide-mobile">
+            <hr>
         </div>
 
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12 graph-mobile bar-chart" id="surface-temp"></div>
+            <div class="col-lg-4 col-md-6 col-sm-12 graph-mobile bar-chart" id="orbit-time"></div>
+            <div class="col-lg-4 col-md-12 col-sm-12 graph-mobile bar-chart" id="orbital-distance"></div>
 
+        </div>
 
+        <div class="row">
+            <div class="col-lg-4 col-md-6 hide-mobile chart-info hide-medium">The bar chart above displays that the most common tempretures on these moons are quite evenly distributed between 64-65 Kelvins.</div>
+            <div class="col-lg-4 col-md-6 hide-mobile chart-info hide-medium">By definition of my research, the orbit durations seems to be one extreme or the other, few moons lay in the middle ground.</div>
+            <div class="col-lg-4 col-md-12 hide-mobile chart-info hide-medium">By the looks of my research the orbital distance seems to be popular around the middle ground, thinning out the further it gets from its medium point.</div>
+        </div>
+
+        <div class="footer hide-mobile">
+            <div><b>Our solar system.</b></div>
+            <div id="footer-planets"></div>
+            <script>
+                var w = 1000
+                var h = 110
+                var planets = [5, 7, 10, 7, 45, 35, 25, 22]
+
+                var svg = d3.select("#footer-planets")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+                svg.selectAll("circle")
+                    .data(planets)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", function(d, i) {
+                        return 50 + (i * 100);
+                    })
+                    .attr("cy", h / 2)
+                    .attr("r", function(d) {
+                        return d;
+                    });
+            </script>
+        </div>
 
 
     </div>
