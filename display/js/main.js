@@ -38,7 +38,7 @@ function display_surface_temperature(ndx) {
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
         .elasticY(true)
-        .xAxisLabel("Temperature (Kelvins)")
+        .xAxisLabel('Temperature (Kelvins)')
         .yAxis().ticks(10);
 }
 
@@ -56,7 +56,7 @@ function display_orbit_time(ndx) {
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
         .elasticY(true)
-        .xAxisLabel("Orbital time (Hours)")
+        .xAxisLabel('Orbital time (Hours)')
         .yAxis().ticks(10);
 }
 
@@ -74,7 +74,7 @@ function display_orbital_distance(ndx) {
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
         .elasticY(true)
-        .xAxisLabel("Orbital distance (Km in thousands)")
+        .xAxisLabel('Orbital distance (Km in thousands)')
         .yAxis().ticks(20);
 }
 
@@ -96,10 +96,10 @@ function display_grav_dist_comparison(ndx) {
         .brushOn(false)
         .symbolSize(10)
         .clipPadding(10)
-        .yAxisLabel("Gravity (m/s)")
-        .xAxisLabel("DistanceFromUranus (Km in million)")
+        .yAxisLabel('Gravity (m/s)')
+        .xAxisLabel('DistanceFromUranus (Km in million)')
         .title(function(d) {
-            return d.key[1] + " by " + d.key[0] + " (" + d.key[2] + ")";
+            return d.key[1] + ' by ' + d.key[0] + ' (' + d.key[2] + ')';
         })
         .dimension(distDim)
         .group(gravityDistGroup)
@@ -118,6 +118,6 @@ function display_moon_radius(ndx) {
         .innerRadius(30)
         .dimension(radDim)
         .group(radGroup)
-        .title(function(d) { return "Km in thousends"; });
+        .title(function(d) { return 'Km in thousends'; });
 
 }
